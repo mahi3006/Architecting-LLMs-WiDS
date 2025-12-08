@@ -6,7 +6,7 @@ Welcome to Week 1! We are skipping the high-level APIs (like `torch.nn` or `Kera
 
 This week, you will build **micrograd**: a tiny Autograd engine. You will implement the mathematical machinery that allows neural networks to learn. By the end of this week, the "magic" of how ChatGPT or Stable Diffusion updates its weights will be demystified—it's just the Chain Rule, applied recursively.
 
-## 🎯 Learning Objectives
+## Learning Objectives
 
 * **Master Derivatives:** Calculate gradients analytically and numerically.
 * **Understand the Computation Graph:** How mathematical expressions are built as trees of operations.
@@ -15,7 +15,7 @@ This week, you will build **micrograd**: a tiny Autograd engine. You will implem
 
 ---
 
-## 🐍 Optional: Python OOP Refresher
+## Optional: Python OOP Refresher
 
 **Status:** *Optional (Skip if you are comfortable with Classes, `__init__`, and `__repr__`)*.
 
@@ -30,7 +30,7 @@ The core assignment relies heavily on Python's Object-Oriented Programming (OOP)
 
 ---
 
-## 📺 The Lecture
+## The Lecture
 
 **Video:** [The spelled-out intro to neural networks and backpropagation: building micrograd](https://www.youtube.com/watch?v=VMj-3S1tku0)
 * **Duration:** ~2 hours 30 mins
@@ -40,7 +40,7 @@ The core assignment relies heavily on Python's Object-Oriented Programming (OOP)
 
 ---
 
-## 📚 Star Resources (The "Why" & "How")
+## Star Resources (The "Why" & "How")
 
 Before or during your coding, use these resources to visualize the math.
 
@@ -54,7 +54,7 @@ Before or during your coding, use these resources to visualize the math.
 
 ---
 
-## 💻 The Assignment
+## The Assignment
 
 **Goal:** Complete the **`micrograd_exercises.ipynb`** notebook found in the `week1/` folder.
 
@@ -83,7 +83,7 @@ The notebook provides a **starter `Value` class** with basic functionality (`__i
 
 ---
 
-## 🚀 Submission
+## Submission
 
 1.  **Save your work:**
     * In Colab, go to `File` > `Save a copy in GitHub`.
@@ -93,3 +93,4 @@ The notebook provides a **starter `Value` class** with basic functionality (`__i
 2.  **Verify:** Check your forked repo on GitHub to ensure your changes are visible.
 
 **Next Week:** We move from scalar values to **Tensors** and start building language models!
+

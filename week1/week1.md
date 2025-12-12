@@ -4,14 +4,14 @@
 
 Welcome to Week 1! We are skipping the high-level APIs (like `torch.nn` or `Keras`) and going straight to the metal.
 
-This week, you will build **micrograd**: a tiny Autograd engine. You will implement the mathematical machinery that allows neural networks to learn. By the end of this week, the "magic" of how ChatGPT or Stable Diffusion updates its weights will be demystified—it's just the Chain Rule, applied recursively.
+This week, you will build **micrograd**: a tiny Autograd engine. You will implement the mathematical machinery that allows neural networks to learn. By the end of this week, the "magic" of how ChatGPT or Stable Diffusion updates its weights will be demystified it's just the Chain Rule, applied recursively.
 
 ## Learning Objectives
 
+* **Master Derivatives:** Calculate gradients analytically and numerically.
 * **Understand the Computation Graph:** How mathematical expressions are built as trees of operations.
-* **Master Backpropagation:** How to recursively apply the Chain Rule to calculate gradients.
-* **Build the `Value` Object:** Creating a Python class that tracks its own history and gradients.
-* **Train a Neuron:** Using your custom engine to train a simple perceptron to classify data.
+* **Build the `Value` Object:** Extend the provided starter code to track history and gradients.
+* **Implement Softmax & Loss:** Use your engine to calculate the standard classification loss.
 
 ---
 
@@ -19,20 +19,20 @@ This week, you will build **micrograd**: a tiny Autograd engine. You will implem
 
 **Status:** *Optional (Skip if you are comfortable with Classes, `__init__`, and `__repr__`)*.
 
-The core assignment relies heavily on Python's Object-Oriented Programming (OOP) features. [cite_start]If you need a refresher, these are the **Corey Schafer** tutorials referenced in the course PDF[cite: 8]:
+The core assignment relies heavily on Python's Object-Oriented Programming (OOP) features. If you need a refresher, these are the **Corey Schafer** tutorials referenced in the course PDF:
 
-* [cite_start]**[Tutorial 1: Classes and Instances](https://www.youtube.com/watch?v=ZDa-Z5JzLYM)** - The basics of `class`, `self`, and `__init__`[cite: 8].
-* [cite_start]**[Tutorial 2: Class Variables](https://www.youtube.com/watch?v=BJ-VvGyQxho)** - Sharing data between all instances[cite: 8].
-* [cite_start]**[Tutorial 3: Class Methods and Static Methods](https://www.youtube.com/watch?v=rq8cL2XMM5M)** - The `@classmethod` and `@staticmethod` decorators[cite: 9].
-* [cite_start]**[Tutorial 4: Inheritance - Creating Subclasses](https://www.youtube.com/watch?v=RSl87lqOXDE)** - How to extend classes (crucial for PyTorch later)[cite: 9].
-* [cite_start]**[Tutorial 5: Special (Magic/Dunder) Methods](https://www.youtube.com/watch?v=3ohzBxoFHAY)** - **Essential:** How to override `__add__` and `__mul__`[cite: 9].
-* [cite_start]**[Tutorial 6: Property Decorators](https://www.youtube.com/watch?v=jCzT9XFZ5bw)** - Using `@property` for getters and setters[cite: 10].
+* **[Tutorial 1: Classes and Instances](https://www.youtube.com/watch?v=ZDa-Z5JzLYM)** - The basics of `class`, `self`, and `__init__`.
+* **[Tutorial 2: Class Variables](https://www.youtube.com/watch?v=BJ-VvGyQxho)** - Sharing data between all instances.
+* **[Tutorial 3: Class Methods and Static Methods](https://www.youtube.com/watch?v=rq8cL2XMM5M)** - The `@classmethod` and `@staticmethod` decorators.
+* **[Tutorial 4: Inheritance - Creating Subclasses](https://www.youtube.com/watch?v=RSl87lqOXDE)** - How to extend classes (crucial for PyTorch later).
+* **[Tutorial 5: Special (Magic/Dunder) Methods](https://www.youtube.com/watch?v=3ohzBxoFHAY)** - **Essential:** How to override `__add__` and `__mul__`.
+* **[Tutorial 6: Property Decorators](https://www.youtube.com/watch?v=jCzT9XFZ5bw)** - Using `@property` for getters and setters.
 
 ---
 
 ## The Lecture
 
-[cite_start]**Video:** [The spelled-out intro to neural networks and backpropagation: building micrograd](https://www.youtube.com/watch?v=VMj-3S1tku0) [cite: 16]
+**Video:** [The spelled-out intro to neural networks and backpropagation: building micrograd](https://www.youtube.com/watch?v=VMj-3S1tku0)
 * **Duration:** ~2 hours 30 mins
 * **Instructor:** Andrej Karpathy
 
@@ -56,21 +56,30 @@ Before or during your coding, use these resources to visualize the math.
 
 ## The Assignment
 
-**Goal:** Complete the Micrograd exercises in the provided notebook.
+**Goal:** Complete the **`micrograd_exercises.ipynb`** notebook found in the `week1/` folder.
 
-### Step 1: Get the Notebook
+### Step 1: Open the Notebook
 1.  Navigate to the **`week1/`** folder in your forked repository.
-2.  Open the file `week1_assignment.ipynb`.
-3.  Click the **"Open in Colab"** badge (if available) or simply upload this file to [Google Colab](https://colab.research.google.com/).
+2.  Open `micrograd_exercises.ipynb`.
+3.  Click the **"Open in Colab"** badge (if available) or upload the file to [Google Colab](https://colab.research.google.com/).
 
-### Step 2: Implement the `Value` Object
-Follow the instructions in the notebook cells. You will need to fill in the missing code for:
-* **Basic Arithmetic:** `__add__`, `__mul__`, `__pow__`.
-* **Activations:** The `tanh` or `relu` function.
-* **Backpropagation:** The `backward()` method and the topological sort.
+### Step 2: Section 1 - Derivatives
+The first half of the notebook focuses on pure calculus concepts to ensure you understand *what* a gradient is before you automate it.
+* **Task 1:** Implement `gradf()` to return the **analytical gradient** (using calculus rules).
+* **Task 2:** Implement the **numerical gradient** approximation (finite difference).
+* **Task 3:** Implement the **symmetric derivative** approximation for better precision.
 
-### Step 3: Train the MLP
-The final cells of the notebook will ask you to use your new `Value` class to build a small `MLP` (Multi-Layer Perceptron) and train it on a binary classification dataset.
+### Step 3: Section 2 - Support for Softmax
+The notebook provides a **starter `Value` class** with basic functionality (`__init__`, `__repr__`, `__add__`). You must extend it to support the operations needed for the Softmax function and Cross-Entropy Loss.
+
+**You need to implement/enable:**
+* **Operations:** `exp()`, `log()`.
+* **Magic Methods:** `__neg__` (negation), `__sub__` (subtraction), `__pow__` (power), `__truediv__` (division).
+* **Reverse Ops:** Ensure `__radd__`, `__rmul__`, etc., work so `1 + x` works just like `x + 1`.
+
+### Step 4: Verification
+* **Sanity Check:** The notebook contains a cell that calculates `loss` using your `Value` class. If your gradients match the expected output `ans`, you are correct.
+* **PyTorch Check:** The final cell asks you to implement the same logic in PyTorch to confirm the results match exactly.
 
 ---
 
@@ -79,8 +88,10 @@ The final cells of the notebook will ask you to use your new `Value` class to bu
 1.  **Save your work:**
     * In Colab, go to `File` > `Save a copy in GitHub`.
     * Select your **forked repository**.
-    * Ensure the file path matches **`week1/week1_assignment.ipynb`** so it updates the existing file.
+    * Ensure the file path matches **`week1/micrograd_exercises.ipynb`** so it updates the existing file.
     * Commit message: "Week 1: Completed Micrograd Exercises".
 2.  **Verify:** Check your forked repo on GitHub to ensure your changes are visible.
 
 **Next Week:** We move from scalar values to **Tensors** and start building language models!
+
+

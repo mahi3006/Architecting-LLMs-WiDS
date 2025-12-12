@@ -1,7 +1,7 @@
   
 ### Architecting LLMs: Building a GPT from Scratch
 
-Most modern AI engineers use Large Language Models, but few understand the exact machinery that makes them work. This mentorship track guides you to **build a functional GPT from first principles**—starting with a blank Python file and ending with a working generative model.
+Most modern AI engineers use Large Language Models, but few understand the exact machinery that makes them work. This mentorship track guides you to **build a functional GPT from first principles** starting with a blank Python file and ending with a working generative model.
 
 Over 6 weeks, we will go from **the calculus of backpropagation → bigram language models → deep neural networks → WaveNets → the full Transformer architecture**, and finally apply your knowledge in a **Capstone Project** where you train and sample from your own custom GPT.
 
